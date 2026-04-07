@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <title>Beatles Quiz</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=4">
+</head>
+<body>
+
+<!-- ═══════════════════ HOME ═══════════════════ -->
+<div id="screen-home" class="screen active">
+  <div class="home-bg">
+    <!-- Real photos mixed with styled era slides -->
+    <div class="bg-slide s-sgtpepper">
+      <img class="slide-photo" src="images/sgt-pepper.jpg" alt="Sgt Pepper era" onerror="this.style.display='none'">
+      <div class="slide-caption"><span class="sc-year">1967</span><span class="sc-title">Sgt. Pepper's Era</span></div>
+    </div>
+    <div class="bg-slide s-george">
+      <img class="slide-photo" src="images/george-1967.jpg" alt="George Harrison 1967" onerror="this.style.display='none'">
+      <div class="slide-caption"><span class="sc-year">1967</span><span class="sc-title">George Harrison</span></div>
+    </div>
+    <div class="bg-slide s-rooftop">
+      <img class="slide-photo" src="images/rooftop.jpg" alt="Rooftop Concert" onerror="this.style.display='none'">
+      <div class="slide-caption"><span class="sc-year">1969</span><span class="sc-title">Rooftop Concert</span></div>
+    </div>
+    <div class="bg-slide s-hamburg">
+      <img class="slide-photo" src="images/john-lennon.jpg" alt="John Lennon">
+      <div class="slide-caption"><span class="sc-year">1962</span><span class="sc-title">John Lennon</span></div>
+    </div>
+    <div class="bg-slide s-paul">
+      <img class="slide-photo" src="images/paul-mccartney.jpg" alt="Paul McCartney">
+      <div class="slide-caption"><span class="sc-year">1962</span><span class="sc-title">Paul McCartney</span></div>
+    </div>
+    <div class="bg-slide s-younggeorge">
+      <img class="slide-photo" src="images/george-harrison.jpg" alt="George Harrison">
+      <div class="slide-caption"><span class="sc-year">1962</span><span class="sc-title">George Harrison</span></div>
+    </div>
+    <div class="bg-slide s-ringo">
+      <img class="slide-photo" src="images/ringo-starr.jpg" alt="Ringo Starr" onerror="this.style.display='none'">
+      <div class="slide-caption"><span class="sc-year">1967</span><span class="sc-title">Ringo Starr</span></div>
+    </div>
+    <div class="bg-slide s-football">
+      <img class="slide-photo" src="images/football.jpg" alt="Beatles playing football" onerror="this.style.display='none'">
+      <div class="slide-caption"><span class="sc-year">1967</span><span class="sc-title">A Day Off in London</span></div>
+    </div>
+    <div class="bg-vignette"></div>
+    <div class="bg-noise"></div>
+  </div>
+
+  <div class="home-inner">
+    <div class="home-logo">
+      <div class="logo-record">
+        <div class="logo-record-groove"></div>
+        <div class="logo-record-label"><span class="logo-note">&#9834;</span></div>
+      </div>
+      <div class="logo-text-wrap">
+        <h1 class="logo-main">BEATLES QUIZ</h1>
+        <p class="logo-sub">GUESS THE SONG</p>
+      </div>
+    </div>
+
+    <p id="home-joke" class="home-joke"></p>
+
+    <div class="home-user">
+      <img id="home-avatar" class="av av-md" src="" alt="avatar">
+      <div class="home-user-info">
+        <span id="home-username" class="home-uname">Loading...</span>
+        <div class="home-pills">
+          <span class="pill pill-gold">Trophies <b id="home-trophies">0</b></span>
+          <span class="pill pill-cyan">Coins <b id="home-coins">0</b></span>
+        </div>
+      </div>
+      <button class="icon-btn" onclick="showScreen('screen-profile')" title="Edit profile">&#9998;</button>
+    </div>
+
+    <div class="home-actions">
+      <button class="action-card" onclick="showScreen('screen-difficulty-mp')">
+        <div class="ac-icon-wrap"><span class="ac-sym">&#9654;</span></div>
+        <div class="ac-body"><b>Open Game</b><small>Create a room and share a PIN</small></div>
+        <span class="ac-arrow">&#8250;</span>
+      </button>
+      <button class="action-card" onclick="showScreen('screen-join')">
+        <div class="ac-icon-wrap"><span class="ac-sym">&#9670;</span></div>
+        <div class="ac-body"><b>Join Game</b><small>Enter a friend's PIN</small></div>
+        <span class="ac-arrow">&#8250;</span>
+      </button>
+      <button class="action-card action-card-accent" onclick="startMatchmaking()">
+        <div class="ac-icon-wrap"><span class="ac-sym">&#9733;</span></div>
+        <div class="ac-body"><b>Quick Match</b><small>Auto-match by trophies</small></div>
+        <span class="ac-arrow">&#8250;</span>
+      </button>
+      <button class="action-card action-card-green" onclick="showScreen('screen-difficulty-sp')">
+        <div class="ac-icon-wrap"><span class="ac-sym">&#9835;</span></div>
+        <div class="ac-body"><b>Solo Practice</b><small>Play alone, no server needed</small></div>
+        <span class="ac-arrow">&#8250;</span>
+      </button>
+    </div>
+
+    <nav class="home-nav">
+      <button class="nav-item" onclick="showScreen('screen-shop')"><span class="nav-sym">&#9824;</span><span>Shop</span></button>
+      <button class="nav-item" onclick="showScreen('screen-profile')"><span class="nav-sym">&#9786;</span><span>Profile</span></button>
+      <button class="nav-item" onclick="showScreen('screen-howtoplay')"><span class="nav-sym">?</span><span>Guide</span></button>
+    </nav>
+  </div>
+</div>
+
+<!-- ═══════════════════ DIFFICULTY (SOLO) ═══════════════════ -->
+<div id="screen-difficulty-sp" class="screen">
+  <header class="topbar">
+    <button class="back-btn" onclick="goBack()">&#8249;</button>
+    <h2 class="topbar-title">Solo Practice</h2>
+    <div class="topbar-right"></div>
+  </header>
+  <div class="diff-wrap">
+    <p class="diff-label">Choose your difficulty</p>
+    <p class="diff-joke" id="diff-sp-joke"></p>
+    <div class="diff-grid">
+      <button class="diff-card diff-easy" onclick="startSinglePlayer('easy')">
+        <div class="diff-tier">Easy</div>
+        <div class="diff-desc">Iconic hits only<br>30 seconds per song</div>
+        <div class="diff-songs">Top 20 songs</div>
+      </button>
+      <button class="diff-card diff-medium" onclick="startSinglePlayer('medium')">
+        <div class="diff-tier">Medium</div>
+        <div class="diff-desc">Well-known tracks<br>20 seconds per song</div>
+        <div class="diff-songs">60 songs</div>
+      </button>
+      <button class="diff-card diff-hard" onclick="startSinglePlayer('hard')">
+        <div class="diff-tier">Hard</div>
+        <div class="diff-desc">Deep cuts and B-sides<br>15 seconds per song</div>
+        <div class="diff-songs">All 200+ songs</div>
+      </button>
+      <button class="diff-card diff-random" onclick="startSinglePlayer('random')">
+        <div class="diff-tier">Random</div>
+        <div class="diff-desc">Mix of everything<br>Random time limit</div>
+        <div class="diff-songs">Surprise!</div>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════ DIFFICULTY (MULTIPLAYER) ═══════════════════ -->
+<div id="screen-difficulty-mp" class="screen">
+  <header class="topbar">
+    <button class="back-btn" onclick="goBack()">&#8249;</button>
+    <h2 class="topbar-title">Open Game</h2>
+    <div class="topbar-right"></div>
+  </header>
+  <div class="diff-wrap">
+    <p class="diff-label">Choose difficulty for your room</p>
+    <p class="diff-joke" id="diff-mp-joke"></p>
+    <div class="diff-grid">
+      <button class="diff-card diff-easy" onclick="startCreateGame('easy')">
+        <div class="diff-tier">Easy</div>
+        <div class="diff-desc">Iconic hits only<br>30 seconds per song</div>
+        <div class="diff-songs">Beginner-friendly</div>
+      </button>
+      <button class="diff-card diff-medium" onclick="startCreateGame('medium')">
+        <div class="diff-tier">Medium</div>
+        <div class="diff-desc">Well-known tracks<br>20 seconds per song</div>
+        <div class="diff-songs">For fans</div>
+      </button>
+      <button class="diff-card diff-hard" onclick="startCreateGame('hard')">
+        <div class="diff-tier">Hard</div>
+        <div class="diff-desc">Deep cuts and B-sides<br>15 seconds per song</div>
+        <div class="diff-songs">Hardcore fans only</div>
+      </button>
+      <button class="diff-card diff-random" onclick="startCreateGame('random')">
+        <div class="diff-tier">Random</div>
+        <div class="diff-desc">Mix of everything<br>Random time limit</div>
+        <div class="diff-songs">Anyone's game</div>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════ PROFILE ═══════════════════ -->
+<div id="screen-profile" class="screen">
+  <header class="topbar">
+    <button class="back-btn" onclick="goBack()">&#8249;</button>
+    <h2 class="topbar-title">Profile</h2>
+    <div class="topbar-right"></div>
+  </header>
+  <div class="scroll-content">
+    <div class="beatles-strip">
+      <div class="bs-member">
+        <img src="images/john-lennon.jpg" class="bs-photo" alt="John Lennon">
+        <span class="bs-name">John</span>
+      </div>
+      <div class="bs-member">
+        <img src="images/paul-mccartney.jpg" class="bs-photo" alt="Paul McCartney">
+        <span class="bs-name">Paul</span>
+      </div>
+      <div class="bs-member">
+        <img src="images/george-harrison.jpg" class="bs-photo" alt="George Harrison">
+        <span class="bs-name">George</span>
+      </div>
+      <div class="bs-member">
+        <img src="images/ringo-starr.jpg" class="bs-photo" alt="Ringo Starr" onerror="this.closest('.bs-member').style.display='none'">
+        <span class="bs-name">Ringo</span>
+      </div>
+      <div class="bs-member">
+        <img src="images/sgt-pepper.jpg" class="bs-photo bs-group" alt="Sgt Pepper" onerror="this.closest('.bs-member').style.display='none'">
+        <span class="bs-name">1967</span>
+      </div>
+      <div class="bs-member">
+        <img src="images/rooftop.jpg" class="bs-photo bs-group" alt="Rooftop" onerror="this.closest('.bs-member').style.display='none'">
+        <span class="bs-name">Rooftop</span>
+      </div>
+      <div class="bs-member">
+        <img src="images/football.jpg" class="bs-photo bs-group" alt="Football" onerror="this.closest('.bs-member').style.display='none'">
+        <span class="bs-name">Day Off</span>
+      </div>
+    </div>
+    <div class="profile-hero">
+      <div class="profile-av-wrap">
+        <img id="profile-avatar-img" class="av av-xl" src="" alt="">
+        <div class="av-ring"></div>
+      </div>
+      <button class="chip-btn" onclick="showScreen('screen-shop')">Change Avatar</button>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Username</label>
+      <div class="input-row">
+        <input type="text" id="profile-username" class="text-input" placeholder="Your name" maxlength="20" autocomplete="off">
+        <button class="btn-primary" onclick="saveProfile()">Save</button>
+      </div>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-box gold"><div class="sb-sym">T</div><div class="sb-val" id="profile-trophies">0</div><div class="sb-lbl">Trophies</div></div>
+      <div class="stat-box cyan"><div class="sb-sym">C</div><div class="sb-val" id="profile-coins">0</div><div class="sb-lbl">Coins</div></div>
+      <div class="stat-box green"><div class="sb-sym">W</div><div class="sb-val" id="profile-wins">0</div><div class="sb-lbl">Wins</div></div>
+      <div class="stat-box purple"><div class="sb-sym">G</div><div class="sb-val" id="profile-guessed">0</div><div class="sb-lbl">Guessed</div></div>
+    </div>
+    <div id="profile-rank" class="rank-card"></div>
+    <p id="profile-joke" class="section-joke"></p>
+  </div>
+</div>
+
+<!-- ═══════════════════ SHOP ═══════════════════ -->
+<div id="screen-shop" class="screen">
+  <header class="topbar">
+    <button class="back-btn" onclick="goBack()">&#8249;</button>
+    <h2 class="topbar-title">Avatar Shop</h2>
+    <div class="topbar-right coins-display">Coins: <span id="shop-coins">0</span></div>
+  </header>
+  <div class="scroll-content">
+    <div id="shop-grid" class="shop-grid"></div>
+  </div>
+</div>
+
+<!-- ═══════════════════ HOW TO PLAY ═══════════════════ -->
+<div id="screen-howtoplay" class="screen">
+  <header class="topbar">
+    <button class="back-btn" onclick="goBack()">&#8249;</button>
+    <h2 class="topbar-title">How to Play</h2>
+    <div class="topbar-right"></div>
+  </header>
+  <div class="scroll-content">
+    <p id="howto-joke" class="section-joke"></p>
+    <div class="guide-list">
+      <div class="guide-item"><div class="gi-num">1</div><div><b>Create or Join</b><p>Share a 6-digit PIN with a friend, or use Quick Match to auto-pair by trophies.</p></div></div>
+      <div class="guide-item"><div class="gi-num">2</div><div><b>Pick a difficulty</b><p>Easy uses only iconic hits (30s timer). Medium mixes in album tracks (20s). Hard is deep cuts only (15s). Random throws everything at you.</p></div></div>
+      <div class="guide-item"><div class="gi-num">3</div><div><b>Listen and guess</b><p>A preview plays. Type the song title as fast as you can — typos and partial matches are accepted.</p></div></div>
+      <div class="guide-item"><div class="gi-num">4</div><div><b>Skip</b><p>Both players must vote skip — the answer gets revealed.</p></div></div>
+      <div class="guide-item"><div class="gi-num">5</div><div><b>Trophies</b><p>Win = +30. Lose = -20. More trophies means harder songs and tougher opponents.</p></div></div>
+      <div class="guide-item"><div class="gi-num">6</div><div><b>Coins</b><p>Winning earns coins. Spend them in the shop on Beatles-era avatars.</p></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════ HOST LOBBY ═══════════════════ -->
+<div id="screen-host" class="screen">
+  <header class="topbar">
+    <button class="back-btn" onclick="cancelGame()">&#8249;</button>
+    <h2 class="topbar-title">Open Game</h2>
+    <div class="topbar-right diff-badge" id="host-diff-badge"></div>
+  </header>
+  <div class="lobby-wrap">
+    <p class="lobby-label">Share this PIN with your friend</p>
+    <div class="pin-box" id="pin-display">------</div>
+    <button class="btn-secondary" onclick="copyPin()">Copy PIN</button>
+    <div class="waiting-block">
+      <div class="spinner-record"><div class="sr-inner"></div></div>
+      <p class="waiting-label">Waiting for opponent...</p>
+      <div class="dots"><span></span><span></span><span></span></div>
+      <p id="lobby-joke" class="lobby-joke"></p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════ JOIN LOBBY ═══════════════════ -->
+<div id="screen-join" class="screen">
+  <header class="topbar">
+    <button class="back-btn" onclick="goBack()">&#8249;</button>
+    <h2 class="topbar-title">Join Game</h2>
+    <div class="topbar-right"></div>
+  </header>
+  <div class="lobby-wrap">
+    <p class="lobby-label">Enter the 6-digit PIN</p>
+    <input type="text" id="pin-input" class="pin-input" placeholder="000000" maxlength="6" inputmode="numeric" pattern="[0-9]*">
+    <button class="btn-primary btn-lg" onclick="joinGame()">Join Game</button>
+    <p id="join-error" class="err-msg"></p>
+  </div>
+</div>
+
+<!-- ═══════════════════ MATCHMAKING ═══════════════════ -->
+<div id="screen-matchmaking" class="screen">
+  <header class="topbar">
+    <button class="back-btn" onclick="cancelMatchmaking()">&#8249;</button>
+    <h2 class="topbar-title">Quick Match</h2>
+    <div class="topbar-right"></div>
+  </header>
+  <div class="lobby-wrap">
+    <div class="spinner-record large"><div class="sr-inner"></div></div>
+    <p class="mm-title">Searching for opponent...</p>
+    <p class="mm-sub">Matching by <span id="mm-trophies">0</span> trophies</p>
+    <div class="dots"><span></span><span></span><span></span></div>
+    <p id="mm-joke" class="lobby-joke"></p>
+  </div>
+</div>
+
+<!-- ═══════════════════ PREGAME ═══════════════════ -->
+<div id="screen-pregame" class="screen pregame-screen">
+  <div class="pregame-inner">
+    <div class="pregame-diff-banner" id="pregame-diff-banner"></div>
+    <div class="pregame-players">
+      <div class="pg-player">
+        <img id="pg-host-av" class="av av-lg" src="" alt="">
+        <span id="pg-host-name" class="pg-name">Player 1</span>
+        <span class="pg-trophies"><span id="pg-host-t">0</span> trophies</span>
+      </div>
+      <div class="vs-ring"><span class="vs-text">VS</span></div>
+      <div class="pg-player">
+        <img id="pg-guest-av" class="av av-lg" src="" alt="">
+        <span id="pg-guest-name" class="pg-name">Player 2</span>
+        <span class="pg-trophies"><span id="pg-guest-t">0</span> trophies</span>
+      </div>
+    </div>
+    <div class="pregame-countdown">
+      <div class="cd-circle" id="cd-circle">3</div>
+      <p id="pregame-msg">Get ready!</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════ GAME ═══════════════════ -->
+<div id="screen-game" class="screen game-screen">
+  <div class="game-top">
+    <div class="round-pill">Round <span id="round-n">1</span> / <span id="round-t">10</span></div>
+    <div class="timer-bar-wrap">
+      <div class="timer-bar-track"><div class="timer-bar-fill" id="timer-fill"></div></div>
+      <span class="timer-num" id="timer-num">30</span>
+    </div>
+    <div class="game-diff-pill" id="game-diff-pill"></div>
+  </div>
+
+  <div class="game-scores">
+    <div class="gs-side gs-left">
+      <img id="gs-l-av" class="av av-sm" src="" alt="">
+      <span id="gs-l-name" class="gs-name">P1</span>
+      <span id="gs-l-score" class="gs-score">0</span>
+    </div>
+    <span class="gs-dot">&#183;</span>
+    <div class="gs-side gs-right">
+      <span id="gs-r-score" class="gs-score">0</span>
+      <span id="gs-r-name" class="gs-name">P2</span>
+      <img id="gs-r-av" class="av av-sm" src="" alt="">
+    </div>
+  </div>
+
+  <div class="game-center">
+    <div class="vinyl-stage">
+      <div class="vinyl-glow"></div>
+      <div class="vinyl spin" id="game-vinyl">
+        <div class="vinyl-tracks"></div>
+        <div class="vinyl-label-ring"><div class="vinyl-label-dot"></div></div>
+      </div>
+    </div>
+
+    <div class="visualizer" id="visualizer">
+      <div class="vbar" style="--i:0"></div><div class="vbar" style="--i:1"></div>
+      <div class="vbar" style="--i:2"></div><div class="vbar" style="--i:3"></div>
+      <div class="vbar" style="--i:4"></div><div class="vbar" style="--i:5"></div>
+      <div class="vbar" style="--i:6"></div><div class="vbar" style="--i:7"></div>
+      <div class="vbar" style="--i:8"></div><div class="vbar" style="--i:9"></div>
+      <div class="vbar" style="--i:10"></div><div class="vbar" style="--i:11"></div>
+      <div class="vbar" style="--i:12"></div><div class="vbar" style="--i:13"></div>
+      <div class="vbar" style="--i:14"></div><div class="vbar" style="--i:15"></div>
+      <div class="vbar" style="--i:16"></div><div class="vbar" style="--i:17"></div>
+      <div class="vbar" style="--i:18"></div><div class="vbar" style="--i:19"></div>
+    </div>
+
+    <p class="guess-hint">Name that song!</p>
+
+    <div class="guess-area">
+      <input type="text" id="guess-input" class="guess-inp" placeholder="Type the song title..." autocomplete="off" autocorrect="off" spellcheck="false">
+      <button class="btn-guess" id="guess-btn" onclick="submitGuess()">&#8594;</button>
+    </div>
+    <div id="guess-fb" class="guess-fb"></div>
+  </div>
+
+  <div class="game-foot">
+    <button class="skip-btn" id="skip-btn" onclick="voteSkip()">Skip <span id="skip-votes">(0/2)</span></button>
+    <button class="mute-btn" id="mute-btn" onclick="toggleMute()">Sound On</button>
+  </div>
+
+  <div id="round-overlay" class="round-overlay">
+    <div class="round-popup" id="round-popup">
+      <div class="rp-icon" id="rp-icon"></div>
+      <div class="rp-result" id="rp-result">Correct!</div>
+      <div class="rp-song" id="rp-song">Hey Jude</div>
+      <div class="rp-by" id="rp-by"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════ GAME OVER ═══════════════════ -->
+<div id="screen-gameover" class="screen gameover-screen">
+  <div id="go-photo-bg" class="go-photo-bg"></div>
+  <canvas id="confetti-canvas"></canvas>
+  <div class="go-inner">
+    <div id="go-headline" class="go-headline"></div>
+    <div id="go-players" class="go-players"></div>
+    <div id="go-rewards" class="go-rewards"></div>
+    <p id="go-joke" class="section-joke"></p>
+    <div class="go-actions">
+      <button class="btn-primary" onclick="goHome()">Home</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast" class="toast"></div>
+<audio id="game-audio" crossorigin="anonymous" preload="auto"></audio>
+
+<script>
+  if (typeof io === 'undefined') {
+    window.io = function() {
+      const h = {};
+      return {
+        connected: false,
+        on(ev, fn)  { (h[ev] = h[ev]||[]).push(fn); },
+        emit()      { },
+        _trigger(ev, data) { (h[ev]||[]).forEach(fn => fn(data)); }
+      };
+    };
+  }
+</script>
+<script src="/socket.io/socket.io.js" onerror=""></script>
+<script src="app.js"></script>
+</body>
+</html>
