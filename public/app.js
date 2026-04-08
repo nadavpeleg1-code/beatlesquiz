@@ -864,6 +864,7 @@ socket.on('connect', () => {
 
 // ─── Create / Join (multiplayer) ───────────────────────────────────────────
 function startCreateGame(diff) {
+  unlockAudio(); // iOS fix
   currentDiff = diff || 'easy';
   user = loadUser();
   socket.emit('createGame', { username:user.username, trophies:user.trophies, coins:user.coins, profilePic:user.profilePic, diff:currentDiff });
@@ -882,6 +883,7 @@ function copyPin() {
 function cancelGame() { currentPin = null; goBack(); }
 
 function joinGame() {
+  unlockAudio(); // iOS fix
   const pin = document.getElementById('pin-input').value.trim();
   const err = document.getElementById('join-error');
   if (pin.length !== 6 || !/^\d+$/.test(pin)) { err.textContent = 'Please enter a valid 6-digit PIN.'; return; }
@@ -959,6 +961,7 @@ let spAnswered = false;
 let spTimerId  = null;
 
 function startSinglePlayer(diff) {
+  unlockAudio(); // Must be called synchronously during user tap (iOS fix)
   currentDiff = diff || 'easy';
   user = loadUser();
   const tier = currentDiff === 'easy' ? 1 : currentDiff === 'medium' ? 2 : 3;
@@ -1293,6 +1296,21 @@ function stopTimer() { clearInterval(timerInterval); }
 
 // ─── Audio ─────────────────────────────────────────────────────────────────
 let audioCtx = null, analyser = null, vizRaf = null, muted = false;
+// Unlock audio on first user gesture (iOS mobile fix)
+let audioUnlocked = false;
+function unlockAudio() {
+  if (audioUnlocked) return;
+  audioUnlocked = true;
+  const a = document.getElementById('game-audio');
+  // Play a tiny silent data URL to satisfy mobile browser gesture requirement
+  a.src = 'data:audio/wav;base64,UklGRigAAABXQVZFZm10IBIAAAABAAEARKwAAIhYAQACABAAAABkYXRhAgAAAAEA';
+  a.volume = 0;
+  a.play().catch(() => {});
+  // Also unlock AudioContext
+  if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  if (audioCtx.state === 'suspended') audioCtx.resume();
+}
+
 function playPreview(url) {
   const a = document.getElementById('game-audio');
   a.src = url; a.muted = muted; a.volume = 0.85;
